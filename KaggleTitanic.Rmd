@@ -1,0 +1,42 @@
+---
+title: "Titanic"
+author: "Jiayang (Lyra) Wang"
+date: "9/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+## R Markdown
+#Variable notes
+
+#Package import
+```{r}
+library(dplyr)
+library(tidyr)
+```
+
+#data import
+```{r}
+train <- read.csv("C:/Users/wangly0/OneDrive - Harrisburg University/6 Practice/Kaggle_Titanic/train.csv", header = TRUE, stringsAsFactors = FALSE)
+test <- read.csv("C:/Users/wangly0/OneDrive - Harrisburg University/6 Practice/Kaggle_Titanic/test.csv", header = TRUE, stringsAsFactors = FALSE)
+```
+#data explanation
+#sibsp: number of siblings or spouses on board; parch: number of parents or children on board
+
+#feature engineering
+#There are 891 observations and Age is the only variable with 177 NAs
+```{r select feature}
+train <- train %>%  
+  select(-PassengerId, -Name, -Ticket, -Cabin)
+
+train$Sex <- as.factor(train$Sex)
+train$Embarked <- as.factor(train$Embarked)
+
+str(train)
+summary(train)
+```
+
